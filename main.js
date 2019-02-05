@@ -45,8 +45,14 @@ function testDataConnection() {
     });
     connection.connect();
 
-    connection.query('SELECT NOW()', (err, res) => {
-        console.log(err, res)
+    // connection.query('SELECT NOW()', (err, res) => {
+    //     console.log(err, res)
+    //     connection.end()
+    // })
+
+    connection.query('SELECT nametest FROM users', (err, res) => {
+        console.log("RESULT FROM QUERY: ", res);
+        console.log("QUERY ERRORS: ", err);
         connection.end()
     })
 }
