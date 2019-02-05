@@ -43,7 +43,14 @@ function testDataConnection() {
         password: process.env.RDS_PASSWORD,
         port: process.env.RDS_PORT,
     });
-    connection.connect();
+    connection.connect(function(err) {
+        if(err) {
+            console.log('could not connect to postgres', err);
+        }
+        else {
+            console.log('SUCCESSSSSSSS', err);
+        }
+    });
 
     // connection.query('SELECT NOW()', (err, res) => {
     //     console.log(err, res)
