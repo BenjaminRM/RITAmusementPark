@@ -50,7 +50,7 @@ function testDataConnection() {
     //     connection.end()
     // })
 
-    connection.query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'", (err, res) => {
+    connection.query("SELECT table_name FROM information_schema.tables", (err, res) => {
         console.log("RESULT FROM QUERY: ", res);
         console.log("QUERY ERRORS: ", err);
         connection.end()
