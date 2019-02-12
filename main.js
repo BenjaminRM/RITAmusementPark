@@ -45,10 +45,10 @@ function testDataConnection() {
     });
     connection.connect(function(err) {
         if(err) {
-            console.log('could not connect to postgres', err);
+            console.log('Could not connect to PostgreSQL: ', err);
         }
         else {
-            console.log('SUCCESSSSSSSS', err);
+            console.log('Successfully connected to the database! ');
         }
     });
 
@@ -68,3 +68,5 @@ function testDataConnection() {
 server.listen(port);
 
 testDataConnection();
+
+//TESTING testFeature Branch
