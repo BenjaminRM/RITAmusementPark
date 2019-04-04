@@ -114,8 +114,6 @@ module.exports = {
                             }
                         });
 
-                       
-
                         //Render the login page with a message
                         user.renderlogin_message(req, res, "Account Successfully Created - Please Log In.")
                     }
@@ -162,9 +160,6 @@ module.exports = {
                 }
             });
         }
-        else{
-            //additional stuff
-        }
     },
     setDashboardSettings : (req, res, next) => {
         if(req.user.type == "Visitor") {
@@ -192,10 +187,6 @@ module.exports = {
             }
 
             res.redirect('/dashboard');
-
-        }
-        else{
-            //additional stuff
         }
     },
     getDashboardOptions : (req, res, next) => {
@@ -235,14 +226,14 @@ module.exports = {
     getPaymentInfo : (req, res, next) => {
         if(req.user.type == "Visitor") {
             //Do a query for all payment information
-            pool.query('SELECT address, city, state, zip, credit_id FROM visitor WHERE login_id=$1 LIMIT 1', [req.user.login_id], (err, visitorResult) => {
+            pool.query('SELECT address, city, state, zip, credit_id, name FROM visitor WHERE login_id=$1 LIMIT 1', [req.user.login_id], (err, visitorResult) => {
                 if(err) {
                     console.error("ERROR FOUND: ", err);
                 }
                 if(visitorResult.rows.length > 0) {
                     auditLog("SUCCESS: [User Payment Information] User: " + req.user.login_id + " Queried for credit_id FROM the visitor table: " + visitorResult.rows[0].credit_id);
 
-                    pool.query('SELECT billing_address, billing_city, billing_state, billing_zip, credit_card_number, credit_card_expiration, credit_card_cvc FROM financial_info WHERE credit_id=$1 LIMIT 1',
+                    pool.query('SELECT billing_address, billing_city, billing_state, billing_zip, last_four_digits, credit_card_expiration, credit_card_cvc, credit_card_name FROM financial_info WHERE credit_id=$1 LIMIT 1',
                                 [visitorResult.rows[0].credit_id], (err, financialResult) => {
                         if(err) {
                             console.error("ERROR FOUND: ", err);
@@ -257,13 +248,24 @@ module.exports = {
                                     billing_state : visitorResult.rows[0].state,
                                     billing_city : visitorResult.rows[0].city,
                                     billing_zip : visitorResult.rows[0].zip,
-                                    credit_card_number : financialResult.rows[0].credit_card_number,
-                                    credit_card_expiration : financialResult.rows[0].credit_card_expiration,
-                                    credit_card_cvc : financialResult.rows[0].credit_card_cvc
+                                    credit_card_name : visitorResult.rows[0].name,
+                                    credit_card_expiration : financialResult.rows[0].credit_card_expiration
                                 }
+
+                                if(financialResult.rows[0].last_four_digits !== null) {
+                                    data.credit_card_number = "****-****-****-" + financialResult.rows[0].last_four_digits;
+                                }
+
+                                if(financialResult.rows[0].credit_card_cvc !== null) {
+                                    data.credit_card_cvc = "***";
+                                }
+                                
                                 user.renderdashboard_payment(req, res, data)
                             }
                             else {
+                                financialResult.rows[0].credit_card_number = "****-****-****-" + financialResult.rows[0].last_four_digits;
+                                financialResult.rows[0].credit_card_cvc = "***";
+
                                 user.renderdashboard_payment(req, res, financialResult.rows[0])
                             }
                             
@@ -281,10 +283,18 @@ module.exports = {
                     console.error("ERROR FOUND: ", err);
                 }
                 if(result.rows.length > 0) {
+                    //Get the last four digits for storage
+                    var cardNum = (req.body.credit_card_number).toString();
+                    var lastFour = cardNum.slice(-4);
+                    +(lastFour)
+
+                    var cardNumHash = bcrypt.hashSync(req.body.credit_card_number);
+                    var cvcHash = bcrypt.hashSync(req.body.credit_card_cvc);
+
                     //Do an insertion query to save all payment information
                     pool.query('UPDATE financial_info SET billing_address=$2, billing_city=$3, billing_state=$4, billing_zip=$5, credit_card_number=$6,' 
-                    + ' credit_card_expiration=$7, credit_card_cvc=$8 WHERE credit_id=$1', [result.rows[0].credit_id, req.body.billing_address, req.body.billing_city, req.body.billing_state,
-                    req.body.billing_zip, req.body.credit_card_number, req.body.credit_card_expiration, req.body.credit_card_cvc], (err, updateResult) => {
+                    + ' credit_card_expiration=$7, credit_card_cvc=$8, credit_card_name=$9, last_four_digits=$10 WHERE credit_id=$1', [result.rows[0].credit_id, req.body.billing_address, req.body.billing_city, req.body.billing_state,
+                    req.body.billing_zip, cardNumHash, req.body.credit_card_expiration, cvcHash, req.body.credit_card_name, lastFour], (err, updateResult) => {
                     if(err) {
                         console.error("ERROR FOUND: ", err);
                     }
