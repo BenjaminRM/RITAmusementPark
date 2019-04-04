@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="active nav-item">
+                        <a class="nav-link" href="/dashboard/News">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/AuditLogs">Audit Logs</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    <main style="margin-left:20%;">
+        <div>
+            {{#if News}}
+                <div class="col-md-12">
+                    <h2>News</h2>
+                    <div class="container pull-left">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="well well-sm">
+                                    <label>Someting Something</label>
+                                    <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text 
+                                        Text Text Text Text Text Text Text Text Text Text Text Text Text Text 
+                                        Text Text Text Text Text Text Text Text Text Text Text Text Text Text 
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="well well-sm">
+                                    <label>Wow this page again, surprise SURPRISE!</label>
+                                    <p>
+                                        Yes, this ridiculous garbage tab will appear on every single user's dashboard
+                                        without exception, but possibly with some modifications. We honestly just needed
+                                        a half decent landing page for the dashboard which wouldn't make the users want to 
+                                        throw their fists through the screen at mach 4. Handlebars sucks, we know that now,
+                                        and we're not going to switch. Too much of a pain.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="well well-sm">
+                                    <label>Someting Something</label>
+                                    <p>
+                                        I can explain...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <h2>Instructions</h2>
+                    <div class="container pull-left">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="well well-sm">
+                                    <label>Audit Logs</label>
+                                    <p>
+                                        lAZy AdMIns DoNT ReAD ThE AuDiT LoGs
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if AuditLogs}}
+                <div>
+                    <h2>Audit Logs</h2>
+                    {{!-- Settings Page: {{data.test}} --}}
+                    <div style="float:left;"class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well well-sm">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Time Stamp</th>
+                                                <th scope="col">Comment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each data}}
+                                                <tr>
+                                                    <td>{{this.datetime}}</td>
+                                                    <td>{{this.comment}}</td>
+                                                </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+    </main>
+    </div>
+</div>

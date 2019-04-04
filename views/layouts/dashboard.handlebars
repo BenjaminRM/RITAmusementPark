@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{{user.email}}'s Dashboard</title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    
+    <style>
+        /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+        .navbar {
+        margin-bottom: 50px;
+        border-radius: 0;
+        }
+        
+        /* Remove the jumbotron's default bottom margin */ 
+        .jumbotron {
+        margin-bottom: 0;
+        }
+    
+        /* Add a gray background color and some padding to the footer */
+        footer {
+        background-color: #f2f2f2;
+        padding: 25px;
+        }
+
+    /*
+    * Sidebar
+    */
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 100; /* Behind the navbar */
+        padding: 0;
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    }
+
+    .sidebar-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 48px; /* Height of navbar */
+        height: calc(100vh - 48px);
+        padding-top: .5rem;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    }
+
+    .sidebar .nav-link {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+    }
+
+    .sidebar .nav-link.active {
+    color: #007bff;
+    }
+
+    .sidebar .nav-link:hover .feather,
+    .sidebar .nav-link.active .feather {
+    color: inherit;
+    }
+
+    .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+    }
+
+    </style>
+
+</head>
+<body>
+    
+    <nav style="z-index:500" class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+            </button>
+            <a class="navbar-brand" href="/home">RIT Amusement Park  😎</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="/home">Home</a></li>
+                <li class="active"><a href="#">Dashboard</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li style="padding-top:20%;">
+                    <form method="POST" action="/api/logout" class="inline">
+                        <input type="hidden" value="Log Out">
+                        <button type="submit" class="link-button">
+                            Log Out
+                        </button>
+                    </form>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    {{{body}}}
+
+</body>
+</html>

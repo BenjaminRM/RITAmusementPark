@@ -1,0 +1,401 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="active nav-item">
+                        <a class="nav-link" href="/dashboard/News">News</a>
+                    </li>
+                    {{!-- <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/Shop">Shop</a>
+                    </li> --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/Settings">Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/PaymentInfo">Payment Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/Options">Options</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    <main style="margin-left:20%;">
+        <div>
+            {{#if News}}
+                <div class="col-md-12">
+                    <h2>News</h2>
+                    <div class="container pull-left">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="well well-sm">
+                                    <label>Someting Something</label>
+                                    <p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text 
+                                        Text Text Text Text Text Text Text Text Text Text Text Text Text Text 
+                                        Text Text Text Text Text Text Text Text Text Text Text Text Text Text 
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="well well-sm">
+                                    <label>Wow this page again, surprise SURPRISE!</label>
+                                    <p>
+                                        Yes, this ridiculous garbage tab will appear on every single user's dashboard
+                                        without exception, but possibly with some modifications. We honestly just needed
+                                        a half decent landing page for the dashboard which wouldn't make the users want to 
+                                        throw their fists through the screen at mach 4. Handlebars sucks, we know that now,
+                                        and we're not going to switch. Too much of a pain.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="well well-sm">
+                                    <label>Someting Something</label>
+                                    <p>
+                                        I can explain...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <h2>Instructions</h2>
+                    <div class="container pull-left">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="well well-sm">
+                                    <label>Settings</label>
+                                    <p>
+                                        Use this tab to fill in your personal information such as your name, address,
+                                        Phone number, and more. Note that the email tied to your account which you use 
+                                        as your login can be changed from this tab. You will not receive a confirmation email
+                                        for the new email because I am lazy, and I honestly couldn't care less about UX right now.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="well well-sm">
+                                    <label>Payment Information</label>
+                                    <p>
+                                        We want your money, and what better way to do that than through the ease of online shopping?
+                                        Too bad we don't have a store yet *ahem* Ben... Use this tab to fill in your card 
+                                        information to use later in the site to purchase membership, or theme park themed stuff which will end up collecting
+                                        dust in the basement only to get thrown away in 4 years when you go to move. Don't forget the overpriced, obnoxious bumper stickers!
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="well well-sm">
+                                    <label>Options</label>
+                                    <p>
+                                        I felt trapped withing my own website so I made this tab, but don't go expecting much of anything fancy.
+                                        You're getting sub-par options at best and honestly, they don't do anything. They just bring you back here. 
+                                        Want to delete your account with a single button? GO FOR IT! I'm not stopping you... you've been warned. 
+                                        The other buttons probably don't work that well, but they're mostly there for privacy reasons. 
+                                        We would really enjoy it if you select each of the boxes though, we sell your data to cambridge analytica 
+                                        for some additional profits. Thanks for the free money!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if Settings}}
+                <div>
+                    <h2>User Settings</h2>
+                    <div style="float:left;"class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well well-sm">
+                                    <form name='settings' action='/dashboard/Settings/Save' method='POST'>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name">
+                                                        Name
+                                                    </label>
+                                                    <input type="text" class="form-control" id="name" name="name" value="{{data.name}}"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="phone">
+                                                        Phone Number
+                                                    </label>
+                                                    <input type="tel" class="form-control" id="phone" name="phone" value="{{data.phone_number}}" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="gender">
+                                                        Gender
+                                                    </label>
+                                                    <input type="text" class="form-control" id="gender" name="gender" value="{{data.gender}}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="email">
+                                                        Email Address
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
+                                                        </span>
+                                                        <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" />
+                                                    </div>
+                                                    Changing this email will also change your login credentials!
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="dob">
+                                                        Date of Birth
+                                                    </label>
+                                                    <input type="date" class="form-control" id="dob" name="dob" value="{{data.date_of_birth}}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="address">
+                                                        Address
+                                                    </label>
+                                                    <input type="text" class="form-control" id="address" name="address" value="{{data.address}}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="city">
+                                                        City
+                                                    </label>
+                                                    <input type="text" class="form-control" id="city" name="city" value="{{data.city}}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="state">
+                                                        State
+                                                    </label>
+                                                    <input type="text" class="form-control" id="state" name="state" value="{{data.state}}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="zip">
+                                                        Zip Code
+                                                    </label>
+                                                    <input type="text" class="form-control" id="zip" name="zip" value="{{data.zip}}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                                                    Save Changes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if Payment}}
+                <div>
+                    <h2>Payment Information</h2>
+                    <div style="float:left;"class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well well-sm">
+                                    <form name='settings' action='/dashboard/PaymentInfo/Save' method='POST'>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="address">
+                                                        Billing Address
+                                                    </label>
+                                                    <input type="text" class="form-control" id="address" name="billing_address" value="{{data.billing_address}}" required/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="city">
+                                                    City
+                                                    </label>
+                                                    <input type="text" class="form-control" id="city" name="billing_city" value="{{data.billing_city}}" required/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="state">
+                                                    State
+                                                    </label>
+                                                    <input type="text" class="form-control" id="state" name="billing_state" value="{{data.billing_state}}" required/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="zip">
+                                                    Zip
+                                                    </label>
+                                                    <input type="text" class="form-control" id="zip" name="billing_zip" value="{{data.billing_zip}}" required/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="cardnum">
+                                                    Card Number
+                                                    </label>
+                                                    <input type="text" class="form-control" id="cardnum" name="credit_card_number" value="{{data.credit_card_number}}" required/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="exp">
+                                                    Expiration Date
+                                                    </label>
+                                                    <input type="date" class="form-control" id="exp" name="credit_card_expiration" value="{{data.credit_card_expiration}}" required/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="cvc">
+                                                    CVC
+                                                    </label>
+                                                    <input type="text" class="form-control" id="cvc" name="credit_card_cvc" value="{{data.credit_card_cvc}}" required/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                                                    Save Changes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {{/if}}
+
+            {{#if Options}}
+                <div>
+                    <h2>Options</h2>
+                    {{!-- Settings Page: {{data.test}} --}}
+                    <div style="float:left;"class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well well-sm">
+                                    <form name='options' action='/dashboard/Options/Save' method='POST'>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="collect_ride_data">
+                                                        Allow the park to collect and store your ride data?
+                                                    </label>
+                                                    <input type="checkbox" class="form-control" id="collect_ride_data" name="collect_ride_data" {{data.collect_ride_data}}/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="allow_for_analysis">
+                                                        Allow the park to analyze your ride, purchase, and website activity?
+                                                    </label>
+                                                    <input type="checkbox" class="form-control" id="allow_for_analysis" name="allow_for_analysis" {{data.allow_for_analysis}}/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                                                    Save Changes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete Account</button>
+                                        </div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="deleteModal" role="dialog">
+                                            <div class="modal-dialog">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Are you sure you want to delete your account?</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Re enter your login credentials and submit to delete your account...</p>
+                                                        <form name='options' action='/dashboard/Options/DeleteAccount' method='POST'>
+                                                            <div class="col-md-12">
+                                                                <label for="email">
+                                                                    Email
+                                                                </label>
+                                                                <input type="text" class="form-control" id="email" name="email" paleholder="Email" required/>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label for="password">
+                                                                    Password
+                                                                </label>
+                                                                <input type="password" class="form-control" id="password" name="password" required/>
+                                                            </div>
+                                                            <div style="margin-top:12px;" class="col-md-12">
+                                                                <button type="submit" class="btn btn-danger pull-right" onclick="alert('This button does not work yet')">
+                                                                    Delete Account
+                                                                </button>
+                                                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">
+                                                                    Close
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                        <p style="height:150px;"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#paymentModal"> Remove Payment Information</button>
+                                        </div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="paymentModal" role="dialog">
+                                            <div class="modal-dialog">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Are you sure you want to delete your Payment Information?</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form name='options' action='/dashboard/Options/RemovePaymentOptions' method='POST'>
+                                                            <div style="margin-top:12px;" class="col-md-12">
+                                                                <button type="submit" class="btn btn-danger pull-right" onclick="alert('This button does not work yet')">
+                                                                    Delete Payment Information
+                                                                </button>
+                                                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">
+                                                                    Close
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                        <p style="height:50px;"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form name='options' action='/dashboard/Options/GDPRReport' method='POST'>
+                                            <div class="col-md-4">
+                                                <button type="submit" class="btn btn-info pull-center" onclick="alert('This button does not work yet')">
+                                                    GDPR Report
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+    </main>
+    </div>
+</div>
