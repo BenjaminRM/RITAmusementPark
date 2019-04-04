@@ -5,7 +5,7 @@ module.exports = (passport, db) => {
     passport.use(new LocalStrategy((email, password, callback) => {
         db.query('SELECT login_id, email, type, password FROM login_info WHERE email=$1 LIMIT 1', [email], (err, result) => {
             if(err) {
-                //TODO log a database failure
+                db.auditLog("FAILURE: failed to query for user login information. Email: " + email);
                 callback(err);
                 console.error("ERROR FOUND: ", err);
             }
@@ -13,7 +13,6 @@ module.exports = (passport, db) => {
             //If a user was found with that email, compare their passwords
             if(result.rows.length > 0) {
                 const first = result.rows[0]
-                //TODO fix this
                 bcrypt.compare(password, first.password, function(err, res) {
                     if(res) {
                         callback(null, {login_id: first.login_id});
@@ -45,7 +44,7 @@ module.exports = (passport, db) => {
     passport.deserializeUser((id, callback) => {
         db.query('SELECT login_id, email, type FROM login_info WHERE login_id = $1 LIMIT 1', [parseInt(id, 10)], (err, results) => {
             if(err) {
-                //TODO log error when selecting user on session deserialize
+                db.auditLog("FAILURE: failed to query for user login information to validate serialization. Login_id: " + id);
                 return callback(err);
             }
 

@@ -13,13 +13,12 @@ require('./config/express')(app, passport)
 require('./config/routes')(app, passport, db)
 
 const server = app.listen(port, () => {
-    //TODO add audit log to state the server is listening on this port
+    console.log("Server running and listening on port: " + port);
 });
 
 server.on('close', () => {
-    //TODO add audit log for server shutting down / closing
-
+    console.log("Server closing...");
     db.pool.end(() => {
-        //TODO add audit log to show closure for the db pool
+        console.log("Database Connection Pool closing...");
     });
 });
