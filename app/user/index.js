@@ -48,6 +48,13 @@ module.exports = {
         });
     },
 
+    renderfailedSignup: (req, res) => {
+        res.render('failedSignup', {
+            layout: false,
+            pageTitle: 'Signup | RIT Amusement Park'
+        });
+    },
+
     renderreset: (req, res) => {
         res.render('resetpassword', {
             layout: false,

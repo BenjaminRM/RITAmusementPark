@@ -43,27 +43,27 @@ module.exports = {
             if(result.rows.length > 0) {
                 auditLog("FAILURE: [Registration] Collision by email. Existing email: " +
                     result.rows[0].email + " Attempted email: " + email)
-                res.redirect("/signup")
+                res.redirect('/signup')
             }
             else if(password.length < 8){
                 auditLog("FAILURE: Password length less than 8 characters.")
-                res.redirect("/signup")
+                res.redirect('/failedSignup')
             }
             else if(!(/[a-z]/.test(password))){
                 auditLog("FAILURE: Password needs to contain at least one lowercase letter.")
-                res.redirect("/signup")
+                res.redirect('/failedSignup')
             }
             else if(!(/[A-Z]/.test(password))){
                 auditLog("FAILURE: Password needs to contain at least one uppercase letter.")
-                res.redirect("/signup")
+                res.redirect('/failedSignup')
             }
             else if(!(/[1-9]/.test(password))){
                 auditLog("FAILURE: Password needs to contain at least one number.")
-                res.redirect("/signup")
+                res.redirect('/failedSignup')
             }
             else if(!(/[!”#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/.test(password))){
                 auditLog("FAILURE: Password needs to contain at least one special character.")
-                res.redirect("/signup")
+                res.redirect('/failedSignup')
             }
             else {
                 var hash = bcrypt.hashSync(password);

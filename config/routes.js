@@ -12,6 +12,7 @@ module.exports = (app, passport, db) => {
 	app.get('/home', user.renderhomepage)
 	app.get('/login', user.renderlogin)
 	app.get('/signup', user.rendersignup)
+    app.get('/failedSignup', user.renderfailedSignup)
 	app.get('/resetpassword', user.renderreset)
 
 	//Users Actions
