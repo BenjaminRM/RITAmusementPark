@@ -27,6 +27,7 @@ go-to for hosting the database and application server gave us a fresh perspectiv
 ##### Application Usage & Testing
 
 ###### Live Testing
+**IMPORTANT!** - This project is no longer live.
 **www.ritamusementpark.net**
 
 This project is meant to be tested live. In it's current state, basic visitor and admin dashboards are functioning. By default when you sign up
