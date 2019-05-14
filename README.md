@@ -27,8 +27,9 @@ go-to for hosting the database and application server gave us a fresh perspectiv
 ##### Application Usage & Testing
 
 ###### Live Testing
-**IMPORTANT!** - This project is no longer live.
-**www.ritamusementpark.net**
+**IMPORTANT!** - This project is still live, but can only be viewed from this URL: http://themepark-env.hpz5jiaefh.us-east-2.elasticbeanstalk.com/
+
+**www.ritamusementpark.net no longer works!**
 
 This project is meant to be tested live. In it's current state, basic visitor and admin dashboards are functioning. By default when you sign up
 and login to the system, you will be a 'visitor' - the most basic of users.
