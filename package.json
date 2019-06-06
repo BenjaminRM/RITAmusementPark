@@ -8,7 +8,7 @@
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
     "express-brute": "^1.0.1",
-    "express-handlebars": "^3.0.0",
+    "express-handlebars": "latest",
     "express-session": "^1.15.6",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
